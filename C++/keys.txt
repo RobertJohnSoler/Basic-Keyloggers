@@ -1,1 +1,1 @@
-	%&SVXTEST TEST TESTC[backspace][tab]	[enter][shift][ctrl][caps] %&'(9ABCEFHIKLMNOPRSTUVWYZFFFFFFFFF [shift]BL[shift]ACK[backspace][backspace][backspace][backspace][backspace][backspace][caps][shift]F[enter][ctrl]C
+[enter]&SS ADSSAC[ctrl][ctrl]XXX[alt]LLL[shift][shift]2[shift]1[shift]11111JKHSCVKJDSHIIDFJN JNJSHBGSDKJHK[shift]P[ctrl]C
