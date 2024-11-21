@@ -1,1 +1,1 @@
-[enter]&[ctrl]C
+[backspace][enter][shift][ctrl]&(AFMOPRSTVHELLO WORLD[shift]1BRUH[ctrl]C

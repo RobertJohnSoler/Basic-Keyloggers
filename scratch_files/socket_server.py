@@ -11,8 +11,9 @@ print("Socket binded to ", port)
 s.listen(5)
 print("Socket is listening...")
 
+
+c, addr = s.accept()
+print("Got connection from ", addr)
 while True:
-    c, addr = s.accept()
-    print("Got connection from ", addr)
-    print(c.recv(1024, 0))
+    print(c.recv(1024).decode(), end="", flush=True)
     
