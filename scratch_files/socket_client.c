@@ -8,7 +8,7 @@
 
 int main()
 {
-    int status, valread, client_fd;
+    int status, client_fd;
     struct sockaddr_in serv_addr;
     const char* hello = "Hello from client";
     char buffer[1024] = { 0 };

