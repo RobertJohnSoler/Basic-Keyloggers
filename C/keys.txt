@@ -1,1 +1,1 @@
-[enter]&I HOPE MY [tab]TXT LOG FILE GOT CLEARED[shift]1[caps][caps][ctrl]C
+[enter]&[ctrl]C

@@ -15,4 +15,4 @@ while True:
     c, addr = s.accept()
     print("Got connection from ", addr)
     print(c.recv(1024, 0))
-    break
+    

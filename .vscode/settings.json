@@ -48,6 +48,8 @@
         "xstring": "cpp",
         "xtr1common": "cpp",
         "xutility": "cpp",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "windows.h": "c",
+        "winsock2.h": "c"
     }
 }
