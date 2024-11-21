@@ -50,6 +50,7 @@
         "xutility": "cpp",
         "stdio.h": "c",
         "windows.h": "c",
-        "winsock2.h": "c"
+        "winsock2.h": "c",
+        "fstream": "cpp"
     }
 }

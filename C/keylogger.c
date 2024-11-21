@@ -89,6 +89,7 @@ void startLogging(struct sockaddr_in *serv_addr, int client_fd) {
 void startWinsock(WSADATA *wsaData) {
     if (WSAStartup(MAKEWORD(2, 2), wsaData) != 0) {
         printf("WSAStartup failed\n");
+        exit(EXIT_FAILURE);
     }
 }
 
@@ -97,6 +98,7 @@ int startSocket() {
     if ((client_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         printf("\n Socket creation error \n");
         WSACleanup();
+        exit(EXIT_FAILURE);
     }
     return client_fd;
 }
