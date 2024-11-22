@@ -51,6 +51,15 @@
         "stdio.h": "c",
         "windows.h": "c",
         "winsock2.h": "c",
-        "fstream": "cpp"
+        "fstream": "cpp",
+        "algorithm": "cpp",
+        "deque": "cpp",
+        "optional": "cpp",
+        "queue": "cpp",
+        "random": "cpp",
+        "set": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "xtree": "cpp"
     }
 }
