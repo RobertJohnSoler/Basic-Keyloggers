@@ -1,1 +1,1 @@
-[backspace][tab][enter][shift][ctrl] %&'(9ACDEHILMNOPRSTUVXYSDFDTESTING TESTING [ctrl]C
+[backspace][enter] %&'CEGKLOPRXYHELLO WORLD[shift][shift]111[ctrl]C
