@@ -13,7 +13,7 @@ int main()
     const char* hello = "Hello from client";
     char buffer[1024] = { 0 };
     WSADATA wsaData;
-    const char* server_ip = "172.20.10.2";
+    const char* server_ip = "127.0.0.1";
 
     // start winsock
     if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {

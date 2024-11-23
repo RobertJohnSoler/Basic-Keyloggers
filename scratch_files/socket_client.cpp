@@ -9,7 +9,7 @@ int main() {
     int wserr;
     WORD wVersionRequested = MAKEWORD(2, 2);
     wserr = WSAStartup(wVersionRequested, &wsaData);
-    const char* server_ip = "172.20.10.2";
+    const char* server_ip = "127.0.0.1";
 
     // Check for initialization success
     if (wserr != 0) {

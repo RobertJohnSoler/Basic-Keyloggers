@@ -25,7 +25,7 @@ int main(){
     WSADATA wsaData;
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(8080);
-    const char* server_ip = "172.20.10.2";
+    const char* server_ip = "127.0.0.1";
 
     startWinsock(&wsaData);
     client_socket = startSocket();
