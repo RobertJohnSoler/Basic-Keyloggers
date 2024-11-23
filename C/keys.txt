@@ -1,1 +1,1 @@
-[backspace][enter][shift] %&'CDLSHELLO WORLD[shift][shift][shift][shift][shift][shift][shift]1 WTF[shift][shift][ctrl]C
+[backspace][tab][enter][shift][ctrl] %&'(01278ABCDEFGHIKLNOPRSTVXYZ HELLO FROM MY [shift]ROG LAPTOP[shift]11[shift]1[shift]FACEBOOKCOM[enter][ctrl]C

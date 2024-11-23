@@ -7,7 +7,7 @@ while True:
 
     port = 8080
 
-    s.bind(('', port))
+    s.bind(('0.0.0.0', port))
     print("Socket binded to ", port)
 
     s.listen(5)

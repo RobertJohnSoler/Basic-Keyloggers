@@ -13,6 +13,7 @@ int main()
     const char* hello = "Hello from client";
     char buffer[1024] = { 0 };
     WSADATA wsaData;
+    const char* server_ip = "172.20.10.2";
 
     // start winsock
     if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
@@ -31,7 +32,7 @@ int main()
     serv_addr.sin_port = htons(8080);
 
     // Convert IPv4 and IPv6 addresses from text to binary form
-    if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0) {
+    if (inet_pton(AF_INET, server_ip, &serv_addr.sin_addr) <= 0) {
         printf("\nInvalid address/ Address not supported \n");
         closesocket(client_fd);
         WSACleanup();

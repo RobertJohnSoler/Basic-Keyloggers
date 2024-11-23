@@ -9,6 +9,7 @@ int main() {
     int wserr;
     WORD wVersionRequested = MAKEWORD(2, 2);
     wserr = WSAStartup(wVersionRequested, &wsaData);
+    const char* server_ip = "172.20.10.2";
 
     // Check for initialization success
     if (wserr != 0) {
@@ -39,7 +40,7 @@ int main() {
     //connection to server
     sockaddr_in clientService;
     clientService.sin_family = AF_INET;
-    clientService.sin_addr.s_addr = inet_addr("127.0.0.1");
+    clientService.sin_addr.s_addr = inet_addr(server_ip);
     clientService.sin_port = htons(8080);
 
     if(connect(clientSocket, (SOCKADDR*)&clientService, sizeof(clientService)) == SOCKET_ERROR){
