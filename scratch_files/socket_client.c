@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <string.h>
 
-// ip address is 192.168.56.1
 
 int main()
 {
