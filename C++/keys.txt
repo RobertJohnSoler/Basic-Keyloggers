@@ -1,1 +1,0 @@
-[enter]&HELLO CHAT GPT[shift]1[backspace][backspace][backspace][backspace][backspace][backspace][backspace][backspace][backspace][backspace][backspace][backspace][backspace][backspace][backspace][backspace][backspace][backspace][backspace][ctrl]C
