@@ -4,8 +4,6 @@
 #include <winuser.h>
 
 
-// this file still needs fixing 
-
 void startLogging();
 
 int main(){
