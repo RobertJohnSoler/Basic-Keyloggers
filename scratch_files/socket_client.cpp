@@ -9,7 +9,7 @@ int main() {
     int wserr;
     WORD wVersionRequested = MAKEWORD(2, 2);
     wserr = WSAStartup(wVersionRequested, &wsaData);
-    const char* server_ip = "10.0.0.184";
+    const char* server_ip = "127.0.0.1";
 
     // Check for initialization success
     if (wserr != 0) {
@@ -60,7 +60,7 @@ int main() {
         std::cout << "Server send error: " << WSAGetLastError() << std::endl;
         return -1;
     } else {
-        std::cout << "Server: sent" << sent << std::endl;
+        std::cout << "Hello message sent. " << std::endl;
     }
 
     closesocket(clientSocket);

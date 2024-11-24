@@ -115,7 +115,6 @@ SOCKET startSocket(){
     return clientSocket;
 }
 
-    // (See the full code here: https://github.com/Tharun8951/cpp-tcp-server/")
 
     //connection to server
 void connectToServer(struct sockaddr_in *serv_addr, SOCKET client_socket, const char* server_ip) {

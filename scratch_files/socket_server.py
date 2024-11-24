@@ -24,10 +24,11 @@ while True:
             print(key, end="", flush=True)
             f.write(key)
         except:
+            print("")
             print("Client must have disconnected.")
             s.close()
             f.close()
             break
-        finally:
-            c.close()
+        # finally:
+        #     c.close()
         

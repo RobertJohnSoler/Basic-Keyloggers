@@ -9,7 +9,7 @@ int main()
 {
     int status, client_fd;
     struct sockaddr_in serv_addr;
-    const char* hello = "Hello from client";
+    const char* hello = "Hello from my C client! \n";
     char buffer[1024] = { 0 };
     WSADATA wsaData;
     const char* server_ip = "127.0.0.1";
@@ -53,5 +53,6 @@ int main()
     // closing the connected socket
     closesocket(client_fd);
     WSACleanup();
+    printf("Client socket closed.");
     return 0;
 }
