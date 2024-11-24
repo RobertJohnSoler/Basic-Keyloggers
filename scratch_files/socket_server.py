@@ -28,4 +28,6 @@ while True:
             s.close()
             f.close()
             break
+        finally:
+            c.close()
         
