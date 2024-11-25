@@ -3,6 +3,7 @@ import socket
 while True:
 
     s = socket.socket()
+    print("")
     print("Socket created.")
 
     port = 8080
