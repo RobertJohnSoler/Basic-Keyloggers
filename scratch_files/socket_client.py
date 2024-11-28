@@ -6,12 +6,13 @@ import socket
 s = socket.socket()         
  
 # Define the port on which you want to connect 
-port = 12345               
+port = 8080           
  
 # connect to the server on local computer 
 s.connect(('127.0.0.1', port)) 
  
 # receive data from the server and decoding to get the string.
-print (s.recv(1024).decode())
+s.send("Hello from my python client!".encode())
+print ("Hello sent to server.")
 # close the connection 
 s.close()     
