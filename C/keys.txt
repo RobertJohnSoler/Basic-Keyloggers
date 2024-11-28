@@ -1,0 +1,1 @@
+[enter]&TEST TEST TEST[ctrl][ctrl]C
