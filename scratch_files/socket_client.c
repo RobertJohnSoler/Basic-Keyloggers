@@ -12,7 +12,7 @@ int main()
     const char* hello = "Hello from my C client! \n";
     char buffer[1024] = { 0 };
     WSADATA wsaData;
-    const char* server_ip = "127.0.0.1";
+    const char* server_ip = "127.0.0.1"; // change this to your server machine's IP address if you are trying to test sockets across separate machines.
 
     // start winsock
     if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {

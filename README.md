@@ -34,6 +34,37 @@ To make sure that your keyloggers would work when you compile them, follow these
 1. Make sure Python 3 is installed in your machine.
 2. Make sure the environment for C/C++ development is already set up on your machine. The C/C++ code in this repo is build for Windows machines, so if that's the OS you are using, follow the guide [here](https://code.visualstudio.com/docs/cpp/config-mingw?fbclid=IwY2xjawG6AfdleHRuA2FlbQIxMAABHSO4WPA2xtDaTKrFsBsA-wPPEC2UcH2cfyFbi2WN0b8scKeCweYNZqBKvw_aem_VmqdFcg02qeJubMOo6dONQ).
 3. Navigate to the `/scratch_files` directory and compile whichever socket client you want to test. For the C client, use the command `g++ socket_client.c -o <output_file_name>.exe  -lws2_32`. Similarly, for the C++ client, use the command `g++ socket_client.cpp -o <output_file_name>.exe  -lws2_32`.
-4. Upon running the 
+4. Open a terminal and run `socket_server.py`. You should be greeted by this output:
+```
+PS C:\Path\To\Basic-Keyloggers> python3 socket_server.py
+
+Socket created.
+Socket binded to  8080
+Socket is listening...
+```
+5. Once you see the output above, open a different terminal and run the socket client you just compiled. For example, if you compiled the C++ socket client, your terminal should look like this:
+```
+PS C:\Path\To\Basic-Keyloggers\scratch_files> g++ socket_client.cpp -o socket_client.exe  -lws2_32
+PS C:\Path\To\Basic-Keyloggers\scratch_files> ./socket_client.exe
+Sending hello message from the C++ client to the server... 
+Hello message sent.
+Client socket closed.
+```
+After running that code, check the terminal where you run the `socket_server.py`. It should have this output:
+```
+PS C:\Path\To\Basic-Keyloggers> python3 socket_server.py
+
+Socket created.
+Socket binded to  8080
+Socket is listening...
+Got connection from  ('127.0.0.1', 54922)
+Hello from my cpp client!
+```
+Of course, the examples shown above are only if you are running both the socket client and socket server in the same machine, hence the IP 127.0.0.1. If you want to try socket communication over two different machines, (like running the server in one laptop and running the client in another), just change the `server_ip` variable in `socket_client.c` or `socket_client.cpp` to the IP address of the computer you are hosting your sever in.
+```
+const char* server_ip = "127.0.0.1"; // change this to your server machine's IP address if you are trying to test sockets across separate machines.
+```
+
+6. If you get the results shown above, then your C/C++ keyloggers should work once compiled.
 
 [comment]: <> (talk about prerequisites next, such as making sure both machines can ping each other, testing the socket scratch files and verifying that socket communications work, attacking your own machine first, and then attacking another machine.)
