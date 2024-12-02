@@ -24,7 +24,7 @@ To compile the C/C++ code, use the following commands (you can change `.c` with 
 * For the actual keyloggers: `g++ -o <output_filename>.exe actual_keylogger.cpp -lws2_32 -mwindows`
 
 To compile the Python keylogger, a different command is needed. Make sure you've installed `pyinstaller` using the command `pip install pyinstaller`.
-* For the actual keylogger: `pyinstaller --noconsole --onefile --name <output_file_name> actual_keylogger.py
+* For the actual keylogger: `pyinstaller --noconsole --onefile --name <output_file_name> actual_keylogger.py`. The .exe file will then be found in the `/dist` folder that gets created.
 
 <br/>
 
