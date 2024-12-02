@@ -15,9 +15,6 @@ int main() {
     if (wserr != 0) {
         std::cout << "Winsock dll not found" << std::endl;
         return 0;
-    } else {
-        std::cout << "Winsock dll found" << std::endl;
-        std::cout << "Status: " << wsaData.szSystemStatus << std::endl;
     }
 
     // Create a socket
@@ -30,8 +27,6 @@ int main() {
         std::cout << "Error at socket(): " << WSAGetLastError() << std::endl;
         WSACleanup();
         return 0;
-    } else {
-        std::cout << "Socket is OK!" << std::endl;
     }
 
     // Continue with the client setup...
@@ -47,13 +42,10 @@ int main() {
         std::cout << "Client: connect() - Failed to connect: " << WSAGetLastError() << std::endl;
         WSACleanup();
         return 0;
-    } else {
-        std::cout << "Client: Connect() is OK!" << std::endl;
-        std::cout << "Client: Can start sending and receiving data..." << std::endl;
     }
 
     char buffer[200];
-    printf("Sending hello message to the server... \n");
+    printf("Sending hello message from the C++ client to the server... \n");
     const char* msg = "Hello from my cpp client!\n";
     int sent = send(clientSocket, msg, strlen(msg), 0);
     if(sent == SOCKET_ERROR){

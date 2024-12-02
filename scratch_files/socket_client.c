@@ -47,6 +47,7 @@ int main()
     }
 
     // send message to server
+    printf("Sending hello message from the C client to the server... \n");
     send(client_fd, hello, strlen(hello), 0);
     printf("Hello message sent\n");
 
