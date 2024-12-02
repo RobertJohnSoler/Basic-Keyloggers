@@ -23,12 +23,14 @@ To compile the C/C++ code, use the following commands (you can change `.c` with 
 * For the socket keyloggers: `g++ -o <output_filename>.exe socket_keylogger.c -lws2_32`
 * For the actual keyloggers: `g++ -o <output_filename>.exe actual_keylogger.cpp -lws2_32 -mwindows`
 
-<br/>
+To compile the Python keylogger, a different command is needed. Make sure you've installed `pyinstaller` using the command `pip install pyinstaller`.
+* For the actual keylogger: `pyinstaller --noconsole --onefile --name <output_file_name> actual_keylogger.py
+
 <br/>
 
 # Prerequsites and Preliminaries
 
-To make sure that your keyloggers would work when you compile them, follow these prerequisites and preliminary tests.
+To make sure that your keyloggers would work when you compile them, follow these prerequisites and preliminary tests. They are used to make sure that your machine can compile the codes and that the codes are capable of socket communication.
 
 ## For C/C++ Keyloggers
 1. Make sure Python 3 is installed in your machine.
@@ -59,6 +61,11 @@ Socket binded to  8080
 Socket is listening...
 Got connection from  ('127.0.0.1', 54922)
 Hello from my cpp client!
+Client must have disconnected.
+
+Socket created.
+Socket binded to  8080
+Socket is listening...
 ```
 Of course, the examples shown above are only if you are running both the socket client and socket server in the same machine, hence the IP 127.0.0.1. If you want to try socket communication over two different machines, (like running the server in one laptop and running the client in another), just change the `server_ip` variable in `socket_client.c` or `socket_client.cpp` to the IP address of the computer you are hosting your sever in.
 ```
@@ -68,3 +75,41 @@ const char* server_ip = "127.0.0.1"; // change this to your server machine's IP 
 6. If you get the results shown above, then your C/C++ keyloggers should work once compiled.
 
 [comment]: <> (talk about prerequisites next, such as making sure both machines can ping each other, testing the socket scratch files and verifying that socket communications work, attacking your own machine first, and then attacking another machine.)
+
+## For Python Keylogger
+1. Make sure Python and pip are both installed in your machine.
+2. Install the libraries `keyboard` and `pyinstaller` on your machine. Run these commands:
+```
+pip install keyboard
+pip install pyinstaller
+```
+3. Open a terminal and run `socket_server.py`. You should be greeted by this output:
+```
+PS C:\Path\To\Basic-Keyloggers> python3 socket_server.py
+
+Socket created.
+Socket binded to  8080
+Socket is listening...
+```
+4. On a separate terminal, navigate to the `/scratch_files` directory and run `socket_client.py`. This terminal should look like this:
+```
+PS C:\Path\To\Basic-Keyloggers\scratch_files> python3 socket_client.py
+Sending hello message from Python client to server...
+Hello sent to server.
+```
+Check the terminal where the socket server was being run. It should have this output:
+```
+PS C:\Path\To\Basic-Keyloggers> python3 socket_server.py
+
+Socket created.
+Socket binded to  8080
+Socket is listening...
+Got connection from  ('127.0.0.1', 54922)
+Hello from my python client!
+Client must have disconnected.
+
+Socket created.
+Socket binded to  8080
+Socket is listening...
+```
+If you got the above results, then your Python keyloggers should work just fine.
