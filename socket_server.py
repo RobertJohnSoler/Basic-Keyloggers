@@ -41,7 +41,9 @@ def handle_client(conn: socket, addr, stop_event: Event):
             break
 
 
-def start_server(stop_event: Event):
+
+if __name__ == "__main__":
+    stop_event = threading.Event()
     s = socket.socket()
     print("")
     print("Socket created.")
@@ -50,30 +52,22 @@ def start_server(stop_event: Event):
     print("Socket binded to 8080")
     print("")
     s.listen(5)
-    waitmsg_thread = threading.Thread(target=print_waitmsg, args=("Socket is listening", stop_event))
-    waitmsg_thread.start()
-    while s and not stop_event.is_set():
-        try:
-            connection, address = s.accept()
-            client_thread = threading.Thread(target=handle_client, args=(connection, address, stop_event))
-            client_thread.start()
-        except socket.timeout:
-            continue
-    print("")
-    print("Closing socket...")
-    s.close()
-
-if __name__ == "__main__":
-    stop_event = threading.Event()
-    server_thread = threading.Thread(target=start_server, args=(stop_event,))
-    server_thread.start()
     try:
-        while True:
-            pass
+        waitmsg_thread = threading.Thread(target=print_waitmsg, args=("Socket is listening", stop_event))
+        waitmsg_thread.start()
+        while s and not stop_event.is_set():
+            try:
+                connection, address = s.accept()
+                client_thread = threading.Thread(target=handle_client, args=(connection, address, stop_event))
+                client_thread.start()
+            except socket.timeout:
+                continue
     except KeyboardInterrupt:
         stop_event.set()
-        server_thread.join()
-        print("Server closing...")
+        print("")
+        print("Closing socket...")
+        s.close()
+        print("Closing server...")
         print("")
         exit()       
 
