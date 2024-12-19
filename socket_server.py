@@ -43,6 +43,8 @@ def handle_client(conn: socket, addr, stop_event: Event):
 
 def start_server(stop_event: Event):
     s = socket.socket()
+    print("")
+    print("Socket created.")
     s.settimeout(1)
     s.bind(('0.0.0.0', 8080))
     print("Socket binded to 8080")
@@ -71,9 +73,8 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         stop_event.set()
         server_thread.join()
-        print("")
         print("Server closing...")
+        print("")
         exit()       
-        print("Server closed") 
 
 
