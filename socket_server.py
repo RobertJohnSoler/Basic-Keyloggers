@@ -29,7 +29,7 @@ def handle_client(conn: socket, addr, stop_event: Event):
                 print("Client must have disconnected.")
                 file.close()
                 break
-            print(key, end="", flush=True)
+            # print(key, end="", flush=True)
             file.write(key)
             file.flush()
         except socket.timeout:
