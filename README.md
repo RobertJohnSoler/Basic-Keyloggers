@@ -9,11 +9,16 @@ Note that the C/C++ versions being used in this repo are for Windows, not MacOS 
 
 ## Keylogger Kinds
 
-If you check each of the files in this repo, you'll notice that each version has three different kinds: `basic_keylogger`, `socket_keylogger`, and `actual_keylogger`. Here are their differences:
+If you check each of the files in this repo, you'll notice that each version has three different kinds: `basic_keylogger`, `socket_keylogger`, and `actual_keylogger`. There are also different socket servers. Here are their differences:
+### Keyloggers
 * `basic_keylogger` - A very basic proof of concept for a keylogger. It simply logs whatever button you press on your keyboard, and stores them in a text file called `keys.txt`.
 * `socket_keylogger` - A keylogger that already uses sockets to send the keystrokes to a server hosted on the attacker's machine. For debugging purposes, `socket_keylogger` also outputs its own `keys.txt` file which contains all of the logged keystrokes.
 * `actual_keylogger` - The closest I could ever get to an actual keylogger used in attacks. If compiled successfuly, it will not show itself on the terminal; rather, it will only run in the background. It won't output its own `keys.txt` file for the sake of stealthiness, and it will immediately send the keystrokes to the attacker's machine without any output for the victim user to see.
-* `socket_server.py` - The server that is run on the attacker's machine. It uses sockets to receive the keystrokes from the keyloggers on the victim's, and automatically writes those keystrokes down on a `.txt` file named after the victim's IP address and port.
+### Socket Servers
+These that the servers that are run on the attacker's machine. They use sockets to receive the keystrokes from the keyloggers on the victim's computer, and automatically writes those keystrokes down on a `.txt` file named after the victim's IP address and port.
+* `socket_server_test.py` - This is a very basic (and inefficient) server code used to test if your keyloggers can really communicate with your server. It can only accept one connection at a time. Good for testing and debugging, very bad for actual hacking.
+* `socket_server.py` - The closest I could ever get to an actual keylogging server used for attacks like this. It does everything that `socket_server_test.py` does, except it has improved error handling, it's more optimized, and it can handle connections coming from multiple keyloggers at once. 
+
 
 ## Important commands:
 
@@ -36,9 +41,9 @@ To make sure that your keyloggers would work when you compile them, follow these
 1. Make sure Python 3 is installed in your machine.
 2. Make sure the environment for C/C++ development is already set up on your machine. The C/C++ code in this repo is build for Windows machines, so if that's the OS you are using, follow the guide [here](https://code.visualstudio.com/docs/cpp/config-mingw?fbclid=IwY2xjawG6AfdleHRuA2FlbQIxMAABHSO4WPA2xtDaTKrFsBsA-wPPEC2UcH2cfyFbi2WN0b8scKeCweYNZqBKvw_aem_VmqdFcg02qeJubMOo6dONQ).
 3. Navigate to the `/scratch_files` directory and compile whichever socket client you want to test. For the C client, use the command `g++ socket_client.c -o <output_file_name>.exe  -lws2_32`. Similarly, for the C++ client, use the command `g++ socket_client.cpp -o <output_file_name>.exe  -lws2_32`.
-4. Open a terminal and run `socket_server.py`. You should be greeted by this output:
+4. Open a terminal and run `socket_server_test.py`. You should be greeted by this output:
 ```
-PS C:\Path\To\Basic-Keyloggers> python3 socket_server.py
+PS C:\Path\To\Basic-Keyloggers> python3 socket_server_test.py
 
 Socket created.
 Socket binded to  8080
@@ -52,9 +57,9 @@ Sending hello message from the C++ client to the server...
 Hello message sent.
 Client socket closed.
 ```
-After running that code, check the terminal where you run the `socket_server.py`. It should have this output:
+After running that code, check the terminal where you run the `socket_server_test.py`. It should have this output:
 ```
-PS C:\Path\To\Basic-Keyloggers> python3 socket_server.py
+PS C:\Path\To\Basic-Keyloggers> python3 socket_server_test.py
 
 Socket created.
 Socket binded to  8080
@@ -83,9 +88,9 @@ const char* server_ip = "127.0.0.1"; // change this to your server machine's IP 
 pip install keyboard
 pip install pyinstaller
 ```
-3. Open a terminal and run `socket_server.py`. You should be greeted by this output:
+3. Open a terminal and run `socket_server_test.py`. You should be greeted by this output:
 ```
-PS C:\Path\To\Basic-Keyloggers> python3 socket_server.py
+PS C:\Path\To\Basic-Keyloggers> python3 socket_server_test.py
 
 Socket created.
 Socket binded to  8080
@@ -99,7 +104,7 @@ Hello sent to server.
 ```
 Check the terminal where the socket server was being run. It should have this output:
 ```
-PS C:\Path\To\Basic-Keyloggers> python3 socket_server.py
+PS C:\Path\To\Basic-Keyloggers> python3 socket_server_test.py
 
 Socket created.
 Socket binded to  8080
