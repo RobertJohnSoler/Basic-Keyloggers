@@ -77,7 +77,7 @@ Of course, the examples shown above are only if you are running both the socket 
 const char* server_ip = "127.0.0.1"; // change this to your server machine's IP address if you are trying to test sockets across separate machines.
 ```
 
-6. If you get the results shown above, then your C/C++ keyloggers should work once compiled.
+If you get the results shown above, then your C/C++ keyloggers should work once compiled.
 
 [comment]: <> (talk about prerequisites next, such as making sure both machines can ping each other, testing the socket scratch files and verifying that socket communications work, attacking your own machine first, and then attacking another machine.)
 
