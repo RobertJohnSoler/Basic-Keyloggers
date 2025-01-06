@@ -7,6 +7,12 @@ The keyloggers in this project come in three different versions: C, C++, and Pyt
 
 Note that the C/C++ versions being used in this repo are for Windows, not MacOS or Linux.
 
+## How it works
+1. Compile your keylogger of choice and download it on your victim machine.
+2. Run the Python server code on your attacker machine.
+3. Run the compiled keylogger on your victim machine.
+4. See the magic happen.
+
 ## Keylogger Kinds
 
 If you check each of the files in this repo, you'll notice that each version has three different kinds: `basic_keylogger`, `socket_keylogger`, and `actual_keylogger`. There are also different socket servers. Here are their differences:
