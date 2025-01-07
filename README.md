@@ -8,10 +8,11 @@ The keyloggers in this project come in three different versions: C, C++, and Pyt
 Note that the C/C++ versions being used in this repo are for Windows, not MacOS or Linux.
 
 ## How it works
-1. Compile your keylogger of choice and download it on your victim machine.
-2. Run the Python server code on your attacker machine.
-3. Run the compiled keylogger on your victim machine.
-4. See the magic happen.
+1. Make sure your attacking machine and victim machine can communicate with each other via sockets (see [Prerequisites and Preliminaries](#section-1)).
+2. Choose the keylogger you want to use, change its `server_ip` to the IP address of your attacking machine and compile it.
+3. Run the Python server code on your attacker machine.
+4. Run the compiled keylogger on your victim machine.
+5. See the magic happen.
 
 ## Keylogger Kinds
 
@@ -39,7 +40,8 @@ To compile the Python keylogger, a different command is needed. Make sure you've
 
 <br/>
 
-# Prerequsites and Preliminaries
+# <a name="section-1"></a> Prerequsites and Preliminaries
+
 
 To make sure that your keyloggers would work when you compile them, follow these prerequisites and preliminary tests. They are used to make sure that your machine can compile the codes and that the codes are capable of socket communication.
 
