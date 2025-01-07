@@ -9,7 +9,7 @@ Note that the C/C++ versions being used in this repo are for Windows, not MacOS 
 
 ## How it works
 1. Make sure your attacking machine and victim machine can communicate with each other via sockets (see [Prerequisites and Preliminaries](#section-1)).
-2. Choose the keylogger you want to use, change its `server_ip` to the IP address of your attacking machine and compile it.
+2. Choose the keylogger you want to use, change its `server_ip` to the IP address of your attacking machine, compile it, and have your victim machine download it.
 3. Run the Python server code on your attacker machine.
 4. Run the compiled keylogger on your victim machine.
 5. See the magic happen.
